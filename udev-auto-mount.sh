@@ -79,7 +79,7 @@ if [ ! -e "/media/${ID_FS_LABEL}" ]; then
         # Don't use "-t auto". Instead use "-t ntfs". It is symbolically linked to ntfs-3g if the latter is installed.
         #  https://wiki.debian.org/NTFS
         ntfs)
-          mount -t ntfs -o sync,noatime,uid=1000,locale=en_US.UTF-8 /dev/${DEVICE} "/media/${ID_FS_LABEL}"
+          mount -t auto -o sync,noatime,uid=1000,locale=en_US.UTF-8 /dev/${DEVICE} "/media/${ID_FS_LABEL}"
         ;;
 
         # ext2/3/4 don't like uid option
@@ -89,9 +89,7 @@ if [ ! -e "/media/${ID_FS_LABEL}" ]; then
     
         # Other unknown filesystem.
         *)
-          log="$0: Error: Unknown filesystem ${ID_FS_TYPE}."
-          echo $log
-          echo $log >> /var/log/udev-automounter.log
+          echo "$0: Error: Unknown filesystem ${ID_FS_TYPE}."
         ;;
            
     esac
