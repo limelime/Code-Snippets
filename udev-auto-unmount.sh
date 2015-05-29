@@ -13,7 +13,7 @@ fi
 #test that the device is already mounted
 MOUNTPT=`mount | grep ${DEVICE} | cut -d ' ' -f 3`
 if [ -n "$device_is_mounted" ]; then
-	echo "error: the device is not already mounted"
+	echo "$0: Error: the device is not already mounted."
 	exit 1
 fi
 
@@ -23,9 +23,9 @@ if [ -e "${MOUNTPT}" ]; then
 	# very naive; just run and pray
 	umount -l "${MOUNTPT}" && rmdir "${MOUNTPT}" && exit 0
 
-	echo "error: ${MOUNTPT} failed to unmount."
+	echo "$0: Error: ${MOUNTPT} failed to unmount."
 	exit 1
 fi
 
-echo "error: ${MOUNTPT} does not exist"
+echo "$0: Error: ${MOUNTPT} does not exist."
 exit 1
