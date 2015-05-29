@@ -17,7 +17,7 @@ fi
 # test that this device isn't already mounted
 device_is_mounted=`grep ${DEVICE} /etc/mtab`
 if [ -n "$device_is_mounted" ]; then
-    echo "error: seems /dev/${DEVICE} is already mounted"
+    echo "$0: Error: Seems /dev/${DEVICE} is already mounted."
     exit 1
 fi
 
@@ -47,7 +47,7 @@ eval `/sbin/blkid -o udev -p /dev/${DEVICE} | sed 's/^/export /; s/=/="/; s/$/"/
 # eval `/sbin/vol_id /dev/${DEVICE} | sed 's/^/export /; s/=/="/; s/$/"/'`
 
 if [ -z "$ID_FS_LABEL" ] || [ -z "$ID_FS_TYPE" ]; then
-    echo "error: ID_FS_LABEL is empty! did vol_id break? tried /dev/${DEVICE}"
+    echo "$0: Error: ID_FS_LABEL is empty! did vol_id break? tried /dev/${DEVICE}."
     exit 1
 fi
 
@@ -86,11 +86,11 @@ if [ ! -e "/media/${ID_FS_LABEL}" ]; then
         ;;
     
         # Other unknown filesystem.
-		    *)
-			    log="$0: Error: Unknown filesystem ${ID_FS_TYPE}."
-			    echo $log
-			    echo $log >> /var/log/udev-automounter.log
-		    ;;
+        *)
+          log="$0: Error: Unknown filesystem ${ID_FS_TYPE}."
+          echo $log
+          echo $log >> /var/log/udev-automounter.log
+        ;;
            
     esac
 
