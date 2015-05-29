@@ -16,3 +16,6 @@ The udev rules are to be put in /etc/udev/rules.d/
 
 For reference, all info was ripped from here:
 http://superuser.com/questions/53978/ubuntu-automatically-mount-external-drives-to-media-label-on-boot-without-a-u?lq=1
+
+# Requirements
+* NTFS will only be mounted as read-only if you don't have ntfs-3g installed.
