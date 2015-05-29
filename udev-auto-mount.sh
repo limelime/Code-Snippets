@@ -71,16 +71,27 @@ if [ ! -e "/media/${ID_FS_LABEL}" ]; then
     # 
     case "$ID_FS_TYPE" in
 
-        vfat)  mount -t vfat -o sync,noatime,uid=1000 /dev/${DEVICE} "/media/${ID_FS_LABEL}"
-            ;;
+        vfat)
+          mount -t vfat -o sync,noatime,uid=1000 /dev/${DEVICE} "/media/${ID_FS_LABEL}"
+        ;;
 
-            # I like the locale setting for ntfs
-            ntfs)  mount -t auto -o sync,noatime,uid=1000,locale=en_US.UTF-8 /dev/${DEVICE} "/media/${ID_FS_LABEL}"
-            ;;
+        # I like the locale setting for ntfs
+        ntfs)
+          mount -t auto -o sync,noatime,uid=1000,locale=en_US.UTF-8 /dev/${DEVICE} "/media/${ID_FS_LABEL}"
+        ;;
 
-            # ext2/3/4 don't like uid option
-            ext*)  mount -t auto -o sync,noatime /dev/${DEVICE} "/media/${ID_FS_LABEL}"
-            ;;
+        # ext2/3/4 don't like uid option
+        ext*)
+          mount -t auto -o sync,noatime /dev/${DEVICE} "/media/${ID_FS_LABEL}"
+        ;;
+    
+        # Other unknown filesystem.
+		    *)
+			    log="$0: Error: Unknown filesystem ${ID_FS_TYPE}."
+			    echo $log
+			    echo $log >> /var/log/udev-automounter.log
+		    ;;
+           
     esac
 
     # all done here, return successful
