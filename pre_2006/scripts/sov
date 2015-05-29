@@ -1,5 +1,0 @@
-#!/bin/sh
-#PREFIX=sudo
-
-echo Saving to memory
-echo mem > /sys/power/state
