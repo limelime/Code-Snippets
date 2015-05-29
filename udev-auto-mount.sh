@@ -76,8 +76,10 @@ if [ ! -e "/media/${ID_FS_LABEL}" ]; then
         ;;
 
         # I like the locale setting for ntfs
+        # Don't use "-t auto". Instead use "-t ntfs". It is symbolically linked to ntfs-3g if the latter is installed.
+        #  https://wiki.debian.org/NTFS
         ntfs)
-          mount -t auto -o sync,noatime,uid=1000,locale=en_US.UTF-8 /dev/${DEVICE} "/media/${ID_FS_LABEL}"
+          mount -t ntfs -o sync,noatime,uid=1000,locale=en_US.UTF-8 /dev/${DEVICE} "/media/${ID_FS_LABEL}"
         ;;
 
         # ext2/3/4 don't like uid option
