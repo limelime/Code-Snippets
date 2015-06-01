@@ -31,8 +31,8 @@ However, if you mount using the same command as in udev rules, it is working fin
 
 
 While trying to fix this issue, I stumble upon this comment:
-```
-You are not supposed to use udev rules to do things as complex as automounting devices. In case of ntfs-3g, the mount process has to be running the whole time while the device is mounted. udev however will kill this process after some time and that's why you get this error message.
-```
+
+>You are not supposed to use udev rules to do things as complex as automounting devices. In case of ntfs-3g, the mount process has to be running the whole time while the device is mounted. udev however will kill this process after some time and that's why you get this error message.
+
 
 https://bbs.archlinux.org/viewtopic.php?pid=1247212#p1247212
