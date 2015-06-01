@@ -70,6 +70,10 @@ if [ ! -e "/media/${ID_FS_LABEL}" ]; then
     # 
     # 
     case "$ID_FS_TYPE" in
+        
+        iso9660)
+          mount -o loop,ro /dev/${DEVICE} "/media/${ID_FS_LABEL}"
+        ;;
 
         vfat)
           mount -t vfat -o sync,noatime,uid=1000 /dev/${DEVICE} "/media/${ID_FS_LABEL}"
