@@ -5,16 +5,14 @@
 
 DEVICE=$1
 
-# check input
+# DEVICE value can't be empty.
 if [ -z "$DEVICE" ]; then
   echo "$0: Error: Unmount failed. Device argument is empty."
   exit 1
 fi
 
-#test that the device is already mounted
+# Get the mount path and unmount it.
 MOUNTPT=$(mount | grep ${DEVICE} | sed 's/^.* on \//\//' | cut -d' ' -f1)
-
-# test mountpoint - it should exist
 if [ -e "${MOUNTPT}" ]; then
 
 	# very naive; just run and pray
@@ -24,5 +22,4 @@ if [ -e "${MOUNTPT}" ]; then
 	exit 1
 fi
 
-echo "$0: Error: ${MOUNTPT} does not exist."
-exit 1
+exit 0
