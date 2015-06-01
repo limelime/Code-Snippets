@@ -7,7 +7,8 @@ DEVICE=$1
 
 # check input
 if [ -z "$DEVICE" ]; then
-	exit 1
+  echo "$0: Error: Unmount failed. Device argument is empty."
+  exit 1
 fi
 
 #test that the device is already mounted
