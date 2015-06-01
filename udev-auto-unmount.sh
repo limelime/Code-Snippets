@@ -18,8 +18,9 @@ if [ -e "${MOUNTPT}" ]; then
 	# very naive; just run and pray
 	umount -l "${MOUNTPT}" && rmdir "${MOUNTPT}" && exit 0
 
-	echo "$0: Error: ${MOUNTPT} failed to unmount."
-	exit 1
+  # Else, unmount failed.
+  echo "$0: Error: ${MOUNTPT} failed to unmount." && exit 1
+
 fi
 
 exit 0
