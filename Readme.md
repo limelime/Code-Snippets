@@ -19,3 +19,20 @@ http://superuser.com/questions/53978/ubuntu-automatically-mount-external-drives-
 
 # Requirements
 * NTFS will only be mounted as read-only if you don't have ntfs-3g installed.
+
+# The End
+Don't use UDEV to automount.
+
+Mounting NTFS partition through udev gave the following error:   
+```
+chmod: cannot access ‘YOU_DEVICE_LABEL/’: Transport endpoint is not connected
+```
+However, if you mount using the same command as in udev rules, it is working fine.
+
+
+While trying to fix this issue, I stumble upon this comment:
+```
+You are not supposed to use udev rules to do things as complex as automounting devices. In case of ntfs-3g, the mount process has to be running the whole time while the device is mounted. udev however will kill this process after some time and that's why you get this error message.
+```
+
+https://bbs.archlinux.org/viewtopic.php?pid=1247212#p1247212
