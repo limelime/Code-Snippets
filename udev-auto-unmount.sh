@@ -11,7 +11,8 @@ if [ -z "$DEVICE" ]; then
 fi
 
 #test that the device is already mounted
-MOUNTPT=`mount | grep ${DEVICE} | cut -d ' ' -f 3`
+MOUNTPT=$(mount | grep "/dev" | sed 's/^.* on \//\//' | cut -d' ' -f1)
+
 if [ -n "$device_is_mounted" ]; then
 	echo "$0: Error: the device is not already mounted."
 	exit 1
